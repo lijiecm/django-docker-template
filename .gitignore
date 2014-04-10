@@ -1,0 +1,4 @@
+*.pyc
+.DS_Store
+/fig.yml
+/{{ project_name }}/public
