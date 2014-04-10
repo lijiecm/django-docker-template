@@ -47,7 +47,7 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', None)
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', None)
 AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN', None)
 AWS_S3_FILE_OVERWRITE = False
-DEFAULT_FILE_STORAGE = 'newproject.settings.s3utils.MediaS3BotoStorage'
+DEFAULT_FILE_STORAGE = '{{ project_name }}.settings.s3utils.MediaS3BotoStorage'
 
 LOGGING = {
     'version': 1,
