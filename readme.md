@@ -1,12 +1,12 @@
 ### A Django template for Fig/Docker
 
 ---
-#####Requirements:  
-- [Docker](https://www.docker.io/)  
-- [Fig](http://orchardup.github.io/fig/install.html)  
-- [Django](https://www.djangoproject.com/)    
+#####Requirements:
+- [Docker](https://www.docker.io/)
+- [Fig](http://orchardup.github.io/fig/install.html)
+- [Django](https://www.djangoproject.com/)
 
-***  
+***
 #####Setup:
 ```shell
 django-admin.py startproject --name=fig-dist.yml --name=Procfile --name=.gitignore --template=https://github.com/bradleyg/django-docker-template/archive/master.zip [project_name]
@@ -15,7 +15,7 @@ In the project folder:
 ```shell
 cp fig-dist.yml fig.yml
 ```
-Add you AWS keys/config to ```fig.yml```.
+Add your AWS keys/config to ```fig.yml```.
 ```bash
 fig build
 fig up -d db redis
