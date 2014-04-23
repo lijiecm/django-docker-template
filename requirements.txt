@@ -1,14 +1,7 @@
-# base
-Django==1.6.2
+django-toolbelt==0.0.1
 South==0.8.4
-psycopg2==2.5.2
 django-storages==1.1.8
 boto==2.27.0
-gunicorn==18.0
 django-heroku-redisify==0.2.1
 redis==2.9.1
 hiredis==0.1.2
-
-# prod
-dj-static==0.0.5
-dj-database-url==0.3.0
