@@ -10,5 +10,7 @@ ALLOWED_HOSTS = []
 
 DATABASES['default'] = dj_database_url.config()
 
+REDIS_URL = os.getenv('REDISCLOUD_URL', '')
+
 CACHE_TIME = 60 * 60
-CACHES = redisify(default=os.getenv('REDISCLOUD_URL', None))
+CACHES = redisify(default=REDIS_URL)

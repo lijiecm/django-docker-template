@@ -15,6 +15,22 @@ web:
     AWS_S3_CUSTOM_DOMAIN: ''
     DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings.dev'
 
+worker:
+  build: .
+  volumes:
+    - ./{{ project_name }}:/code
+  links:
+   - db
+   - redis
+  command: celery -A {{ project_name }} worker -l info
+  environment:
+    C_FORCE_ROOT: 'True'
+    AWS_ACCESS_KEY_ID: ''
+    AWS_SECRET_ACCESS_KEY: ''
+    AWS_STORAGE_BUCKET_NAME: ''
+    AWS_S3_CUSTOM_DOMAIN: ''
+    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings.dev'
+
 db:
   image: orchardup/postgresql
 
