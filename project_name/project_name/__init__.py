@@ -1,1 +1,1 @@
-import .celery import *
+from .celery import *
