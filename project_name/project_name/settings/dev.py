@@ -1,20 +1,25 @@
 from .base import *
 
-from redisify import redisify
+import os
+import dj_database_url
+from .utils import get_caches
+
 
 DEBUG = True
 TEMPLATE_DEBUG = True
 
-DATABASES['default'] = {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'docker',
-    'USER': 'docker',
-    'PASSWORD': 'docker',
-    'HOST': os.environ.get('DB_1_PORT_5432_TCP_ADDR'),
-    'PORT': os.environ.get('DB_1_PORT_5432_TCP_PORT'),
-}
-
-REDIS_URL = os.getenv('REDIS_1_PORT', '').replace('tcp', 'redis')
-
+REDIS_URL = os.getenv('REDIS_1_PORT', '')
 CACHE_TIME = 0
-CACHES = redisify(default=REDIS_URL)
+CACHES = get_caches(REDIS_URL)
+
+DATABASE_URL = 'postgres://%s:%s@%s:%s/%s' % (
+    'docker',
+    'docker',
+    os.environ.get('DB_1_PORT_5432_TCP_ADDR'),
+    os.environ.get('DB_1_PORT_5432_TCP_PORT'),
+    'docker',
+)
+
+DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
+
+ALLOWED_HOSTS = []
