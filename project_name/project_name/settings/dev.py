@@ -17,4 +17,4 @@ DATABASES['default'] = {
 REDIS_URL = os.getenv('REDIS_1_PORT', '').replace('tcp', 'redis')
 
 CACHE_TIME = 0
-CACHES = redisify(default=REDIS_URL))
+CACHES = redisify(default=REDIS_URL)
