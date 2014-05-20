@@ -28,6 +28,8 @@ ROOT_URLCONF = '{{ project_name }}.urls'
 WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
 
 DATABASES = {}
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
 
 LANGUAGE_CODE = 'en-gb'
 TIME_ZONE = 'Europe/London'
