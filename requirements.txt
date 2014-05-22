@@ -1,5 +1,6 @@
 django-toolbelt==0.0.1
 South==0.8.4
+Pillow==2.4.0
 django-storages==1.1.8
 boto==2.27.0
 django-redis==3.6.2
