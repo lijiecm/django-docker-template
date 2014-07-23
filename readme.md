@@ -24,6 +24,14 @@ fig up web
 ```
 Point your browser to your docker IP at port 5000.
 ***
-#####Heroku required addons:
-- [Redis Cloud](https://addons.heroku.com/rediscloud)
-- [Heroku Postgres](https://addons.heroku.com/heroku-postgresql)
+#####Required environment variables:
+```shell
+AWS_ACCESS_KEY_ID: ''
+AWS_SECRET_ACCESS_KEY: ''
+AWS_STORAGE_BUCKET_NAME: ''
+AWS_S3_CUSTOM_DOMAIN: ''
+DJANGO_SETTINGS_MODULE: ''
+DATABASE_URL: ''
+REDIS_URL: ''
+DEBUG: 1 # Remove to turn off debugging.
+```

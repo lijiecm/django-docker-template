@@ -13,7 +13,10 @@ web:
     AWS_SECRET_ACCESS_KEY: ''
     AWS_STORAGE_BUCKET_NAME: ''
     AWS_S3_CUSTOM_DOMAIN: ''
-    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings.dev'
+    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings'
+    DATABASE_URL: 'postgres://docker:docker@db_1:5432/docker'
+    REDIS_URL: 'redis://redis_1:6379'
+    DEBUG: 1
 
 worker:
   build: .
@@ -29,7 +32,10 @@ worker:
     AWS_SECRET_ACCESS_KEY: ''
     AWS_STORAGE_BUCKET_NAME: ''
     AWS_S3_CUSTOM_DOMAIN: ''
-    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings.dev'
+    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings'
+    DATABASE_URL: 'postgres://docker:docker@db_1:5432/docker'
+    REDIS_URL: 'redis://redis_1:6379'
+    DEBUG: 1
 
 db:
   image: orchardup/postgresql

@@ -1,6 +1,14 @@
 import os
+import dj_database_url
 
-BASE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), '..')
+from .utils import get_caches
+
+DEBUG = os.environ.get('DEBUG', False)
+TEMPLATE_DEBUG = DEBUG
+
+ALLOWED_HOSTS = []
+
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '{{ secret_key }}'
 
 INSTALLED_APPS = (
@@ -28,6 +36,12 @@ ROOT_URLCONF = '{{ project_name }}.urls'
 WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
 
 DATABASES = {}
+DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
+
+REDIS_URL = os.environ.get('REDIS_URL')
+CACHES = get_caches(REDIS_URL)
+
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
 
@@ -50,7 +64,7 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', None)
 AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN', None)
 AWS_S3_FILE_OVERWRITE = False
 AWS_QUERYSTRING_AUTH = False
-DEFAULT_FILE_STORAGE = '{{ project_name }}.settings.s3utils.MediaS3BotoStorage'
+DEFAULT_FILE_STORAGE = '{{ project_name }}.utils.MediaS3BotoStorage'
 
 LOGGING = {
     'version': 1,
