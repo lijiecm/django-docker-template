@@ -1,7 +1,8 @@
 import os
+from urlparse import urlparse
+
 import dj_database_url
 
-from .utils import get_caches
 
 DEBUG = os.environ.get('DEBUG', False)
 TEMPLATE_DEBUG = DEBUG
@@ -9,7 +10,7 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = []
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-SECRET_KEY = '{{ secret_key }}'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -40,7 +41,18 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
 
 REDIS_URL = os.environ.get('REDIS_URL')
-CACHES = get_caches(REDIS_URL)
+
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.cache.RedisCache',
+        'LOCATION': '%s:%s:1' % (urlparse(REDIS_URL).hostname,
+                                 urlparse(REDIS_URL).port),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+            'PASSWORD': urlparse(REDIS_URL).password
+        }
+    }
+}
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
@@ -64,7 +76,9 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', None)
 AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN', None)
 AWS_S3_FILE_OVERWRITE = False
 AWS_QUERYSTRING_AUTH = False
-DEFAULT_FILE_STORAGE = '{{ project_name }}.utils.MediaS3BotoStorage'
+
+from storages.backends.s3boto import S3BotoStorage
+DEFAULT_FILE_STORAGE = S3BotoStorage(location='media')
 
 LOGGING = {
     'version': 1,

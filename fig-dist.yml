@@ -13,10 +13,11 @@ web:
     AWS_SECRET_ACCESS_KEY: ''
     AWS_STORAGE_BUCKET_NAME: ''
     AWS_S3_CUSTOM_DOMAIN: ''
-    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings'
     DATABASE_URL: 'postgres://docker:docker@db_1:5432/docker'
-    REDIS_URL: 'redis://redis_1:6379'
     DEBUG: 1
+    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings'
+    REDIS_URL: 'redis://redis_1:6379'
+    SECRET_KEY: '{{ secret_key }}'
 
 worker:
   build: .
@@ -27,15 +28,16 @@ worker:
    - redis
   command: celery -A {{ project_name }} worker -l info
   environment:
-    C_FORCE_ROOT: 'True'
     AWS_ACCESS_KEY_ID: ''
     AWS_SECRET_ACCESS_KEY: ''
     AWS_STORAGE_BUCKET_NAME: ''
     AWS_S3_CUSTOM_DOMAIN: ''
-    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings'
+    C_FORCE_ROOT: 'True'
     DATABASE_URL: 'postgres://docker:docker@db_1:5432/docker'
-    REDIS_URL: 'redis://redis_1:6379'
     DEBUG: 1
+    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings'
+    REDIS_URL: 'redis://redis_1:6379'
+    SECRET_KEY: '{{ secret_key }}'
 
 db:
   image: orchardup/postgresql
