@@ -2,6 +2,7 @@ import os
 from urlparse import urlparse
 
 import dj_database_url
+from redisify import redisify
 
 
 DEBUG = os.environ.get('DEBUG', False)
@@ -41,18 +42,7 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
 
 REDIS_URL = os.environ.get('REDIS_URL')
-
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.cache.RedisCache',
-        'LOCATION': '%s:%s:1' % (urlparse(REDIS_URL).hostname,
-                                 urlparse(REDIS_URL).port),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
-            'PASSWORD': urlparse(REDIS_URL).password
-        }
-    }
-}
+CACHES = redisify(default=REDIS_URL)
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
