@@ -50,7 +50,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'))
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
