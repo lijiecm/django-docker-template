@@ -40,7 +40,7 @@ worker:
     SECRET_KEY: '{{ secret_key }}'
 
 db:
-  image: postgresql
+  image: postgres
 
 redis:
   image: redis
