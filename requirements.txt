@@ -1,5 +1,5 @@
-https://www.djangoproject.com/download/1.7c2/tarball/
 https://github.com/coagulant/django-storages-py3/archive/py3.zip
+Django==1.7
 dj-static==0.0.6
 dj-database-url==0.3.0
 gunicorn==19.1.0
