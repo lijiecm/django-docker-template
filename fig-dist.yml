@@ -9,10 +9,6 @@ web:
    - 5000:5000
   command: python3 manage.py runserver 0.0.0.0:5000
   environment:
-    AWS_ACCESS_KEY_ID: ''
-    AWS_SECRET_ACCESS_KEY: ''
-    AWS_STORAGE_BUCKET_NAME: ''
-    AWS_S3_CUSTOM_DOMAIN: ''
     DATABASE_URL: 'postgres://postgres:postgres@db_1:5432/postgres'
     DEBUG: 1
     DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings'
@@ -28,10 +24,6 @@ worker:
    - redis
   command: celery -A {{ project_name }} worker -l info
   environment:
-    AWS_ACCESS_KEY_ID: ''
-    AWS_SECRET_ACCESS_KEY: ''
-    AWS_STORAGE_BUCKET_NAME: ''
-    AWS_S3_CUSTOM_DOMAIN: ''
     C_FORCE_ROOT: 'True'
     DATABASE_URL: 'postgres://postgres:postgres@db_1:5432/postgres'
     DEBUG: 1
