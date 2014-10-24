@@ -9,11 +9,11 @@ web:
    - 5000:5000
   command: python3 manage.py runserver 0.0.0.0:5000
   environment:
-    DATABASE_URL: 'postgres://postgres:postgres@db_1:5432/postgres'
-    DEBUG: 1
-    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings'
-    REDIS_URL: 'redis://redis_1:6379'
+    STATIC_HOST: ''
+    DATABASE_URL: 'postgres://postgres:postgres@db:5432/postgres'
+    REDIS_URL: 'redis://redis:6379'
     SECRET_KEY: '{{ secret_key }}'
+    DEBUG: 1
 
 worker:
   build: .
@@ -24,12 +24,12 @@ worker:
    - redis
   command: celery -A {{ project_name }} worker -l info
   environment:
-    C_FORCE_ROOT: 'True'
-    DATABASE_URL: 'postgres://postgres:postgres@db_1:5432/postgres'
-    DEBUG: 1
-    DJANGO_SETTINGS_MODULE: '{{ project_name }}.settings'
-    REDIS_URL: 'redis://redis_1:6379'
+    STATIC_HOST: ''
+    DATABASE_URL: 'postgres://postgres:postgres@db:5432/postgres'
+    REDIS_URL: 'redis://redis:6379'
     SECRET_KEY: '{{ secret_key }}'
+    DEBUG: 1
+    C_FORCE_ROOT: 1
 
 db:
   image: postgres
