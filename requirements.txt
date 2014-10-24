@@ -1,8 +1,8 @@
-Django==1.7
-dj-static==0.0.6
+Django==1.7.1
+whitenoise==1.0.3
 dj-database-url==0.3.0
-gunicorn==19.1.0
-psycopg2==2.5.3
-celery==3.1.13
-hiredis==0.1.4
+gunicorn==19.1.1
+psycopg2==2.5.4
+celery==3.1.16
+hiredis==0.1.5
 django-heroku-redisify==0.2.1

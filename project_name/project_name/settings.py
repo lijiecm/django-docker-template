@@ -52,11 +52,11 @@ USE_TZ = True
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATIC_ROOT = os.path.join(BASE_DIR, 'public')
-STATIC_URL = '/static/'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATIC_HOST = os.environ.get('STATIC_HOST')
+STATIC_URL = STATIC_HOST + '/static/'
 
 LOGGING = {
     'version': 1,
