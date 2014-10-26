@@ -15,7 +15,7 @@ In the project folder:
 ```shell
 cp fig-dist.yml fig.yml
 fig up -d db redis
-fig run web python manage.py syncdb
+fig run web python3 manage.py syncdb
 fig up
 ```
 Point your browser to your docker IP at port 5000.
